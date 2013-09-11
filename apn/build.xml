@@ -1,0 +1,254 @@
+<project name="APN" default="scp_api" basedir=".">
+
+
+	<!-- ===================== Property Definitions =========================== -->
+
+	<property file="build.properties" />	
+	<property name="persistence" value="persistence" />
+	<property name="module_test" value="module_test" />
+	<property name="conf_folder" value="apn_config" />
+	<property name="persistence_conf" value="${conf_folder}/apidb.xml" />
+	
+	<property name="persistence_jar" value="apidb.jar" />
+
+	<property name="dev_path" value="D:/dev_path" />
+	<property name="archive" value="ROOT.war" />
+
+	<!-- ==================== File and Directory Names ======================== -->
+
+	<property environment="env" />
+	<property name="app.name" value="oauth2" />
+	<property name="app.path" value="/${app.name}" />
+	<property name="app.version" value="0.1-dev" />
+	<property name="build.home" value="${basedir}/build" />
+	<property name="dist.home" value="${basedir}/dist" />
+	<property name="docs.home" value="${basedir}/docs" />
+	<property name="src.home" value="${basedir}/src" />
+
+	<property name="web.home" value="${basedir}/WebContent" />
+	<property name="catalina.home" value="D:\java\apache-tomcat-7.0.42" />
+	<property name="manager.url" value="http://localhost:8080/manager" />
+	<property name="manager.username" value="tomcat" />
+	<property name="manager.password" value="tomcat" />
+
+
+	<!-- ================== Custom Ant Task Definitions ======================= -->
+
+	<taskdef name="deploy"   classname="org.apache.catalina.ant.DeployTask" classpath="${catalina.home}/lib/catalina-ant.jar"/>
+	<taskdef name="list"     classname="org.apache.catalina.ant.ListTask" classpath="${catalina.home}/lib/catalina-ant.jar"/>
+	<taskdef name="reload"   classname="org.apache.catalina.ant.ReloadTask" classpath="${catalina.home}/lib/catalina-ant.jar"/>
+	<taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" classpath="${catalina.home}/lib/catalina-ant.jar"/>
+
+
+	<!--  ==================== Compilation Control Options ==================== -->
+
+	<property name="compile.debug" value="true" />
+	<property name="compile.deprecation" value="false" />
+	<property name="compile.optimize" value="true" />
+	<property name="compile.encoding" value="UTF8" />
+
+
+	<!-- ==================== Compilation Classpath =========================== -->
+
+	<path id="compile.classpath">
+		<pathelement location="${catalina.home}/common/classes" />
+		<pathelement location="${catalina.home}/shared/classes" />
+		<fileset dir="${catalina.home}/lib">
+					<include name="*.jar" />
+				</fileset>		
+		
+		<fileset dir="${web.home}/WEB-INF/lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+
+	<!-- ==================== All Target ====================================== -->
+
+	<target name="all" depends="clean,compile,dist" description="Clean build and dist directories, then compile" />
+
+
+	<!-- ==================== Clean Target ==================================== -->
+
+	<target name="clean" description="Delete old build and dist directories">
+		<delete dir="${build.home}" />
+		<delete dir="${dist.home}" />
+		<delete dir="${docs.home}" />
+	</target>
+
+	<!-- ==================== Compile Target ================================== -->
+
+	<target name="compile" depends="prepare" description="Compile Java sources">
+
+		<!-- Compile Java classes as necessary -->
+		<mkdir dir="${build.home}/web/WEB-INF/classes" />
+		<javac srcdir="${src.home}" destdir="${build.home}/web/WEB-INF/classes" debug="${compile.debug}" deprecation="${compile.deprecation}" optimize="${compile.optimize}" encoding="${compile.encoding}">
+			<classpath refid="compile.classpath" />
+		</javac>
+
+	</target>
+
+	<!-- ==================== Compile Target ================================== -->
+
+	<!--
+	<jar jarfile="sdsales.jar" basedir="${build}" manifest="${src}/MANIFEST.MF"/>
+	call java -cp ./cache.jar:./jio.jar -jar wanmeiaudb.jar wmsd.xml dump >wmsd.sql
+	-->
+
+	<target name="prepare_persistence" depends="prepare" description="prepare persistence layer ">
+
+		<!-- Remove persistence java files -->
+		<delete dir="${persistence}/src/com/wanmei/api/persistence" />
+
+		<!-- Generate persistence java files
+		<java classname="com.wanmei.db.Application">
+			<arg value="${persistence_conf}" />			
+			<classpath>
+				<pathelement location="${dev_path}/wanmei/db/wanmeiaudb.jar" />
+				<pathelement location="${dev_path}/wanmei/db/cache.jar" />
+				<pathelement location="${dev_path}/wanmei/db/jio.jar" />
+			</classpath>
+		</java>
+		--> 
+		 <exec executable="cmd">
+		    <arg value="/c"/>
+		    <arg value="C:\Program Files\Java\jdk1.6.0_24\bin\java"/>
+		 	<arg value="-classpath"/>
+		 	<arg value="${dev_path}/wanmei/db/cache.jar;${dev_path}/wanmei/db/jio.jar"/>
+		 	<arg value="-jar"/>
+		 	<arg value="${dev_path}/wanmei/db/wanmeiaudb.jar"/>
+		 	<arg value="${persistence_conf}"/>
+		 	<arg value="dump>api.sql"/>		    
+		  </exec>
+		
+		<mkdir dir="${dist.home}" />
+		
+		<!-- Compile Java classes as necessary -->
+		<mkdir dir="${build.home}/persistence" />
+		<javac srcdir="${persistence}/src" destdir="${build.home}/persistence" debug="${compile.debug}" deprecation="${compile.deprecation}" optimize="${compile.optimize}" encoding="${compile.encoding}">
+			<classpath refid="compile.classpath" />
+		</javac>
+		
+		<jar jarfile="${dist.home}/${persistence_jar}" basedir="${build.home}/persistence" />
+								
+		<copy file="${dist.home}/${persistence_jar}" tofile="WebContent/WEB-INF/lib/${persistence_jar}" />
+		
+
+	</target>
+
+
+	<!-- ==================== Dist Target ===================================== -->
+
+
+	<target name="dist" depends="compile" description="Create binary distribution">
+
+		<mkdir dir="${dist.home}" />
+		
+		<!-- Create application JAR file -->
+		<jar jarfile="${dist.home}/TrafficApn.war" basedir="${build.home}/web" />
+
+		<!--
+	<war destfile="${dist.home}/${app.name}.war"
+		basedir="${build.home}" webxml="${web.home}/WEB-INF/web.xml"></war>
+	!-->
+		<!--
+	<jar jarfile="${dist.home}/${app.name}.jar" basedir="${build.home}/WEB-INF/classes">
+		<fileset dir="${web.home}/WEB-INF/lib"><include name="*.jar"/></fileset>
+	</jar>
+	-->
+	</target>
+	
+	<target name="scp_api" depends="dist" description="Install application to servlet container">
+
+		<scp file="${dist.home}/${archive}" todir="tomcat@172.16.253.81:/home/tomcat/api" trust="true" keyfile="/home/zhangchong/.ssh/id_rsa" passphrase="chong712" />		
+	<!--	<scp file="apiconfig.xml" todir="tomcat@172.16.0.106:/export/apache-tomcat-7.0.23/common/api_config" trust="true" password="tomcat123" /> -->
+
+	</target>
+
+
+	<!-- ==================== Install Target ================================== -->
+
+	<target name="deploy" depends="" description="Install application to servlet container">
+
+		<copy todir="${catalina.home}/wtpcommon/${conf_folder}">
+			<fileset dir="${conf_folder}" />
+		</copy>
+		
+		<copy todir="${catalina.home}/common/${conf_folder}">
+			<fileset dir="${conf_folder}" />
+		</copy>
+		
+		<!--
+		<copy file="${dist.home}/ROOT.war" todir="${catalina.home}/webapps/${app.name}"/>
+		
+		<delete dir="${catalina.home}/webapps/${app.name}/ROOT" />
+
+		
+    <deploy url="${manager.url}"
+       username="${manager.username}"
+       password="${manager.password}"
+           path="${app.path}"
+       localWar="file://${build.home}"/>
+	   -->
+	</target>
+	
+
+	<!-- ==================== Javadoc Target ================================== -->
+
+	<target name="javadoc" depends="compile" description="Create Javadoc API documentation">
+
+		<mkdir dir="${docs.home}/api" />
+		<javadoc sourcepath="${src.home}" destdir="${docs.home}/api" packagenames="*">
+			<classpath refid="compile.classpath" />
+		</javadoc>
+
+	</target>
+
+
+
+	<!-- ====================== List Target =================================== -->
+
+	<target name="list" description="List installed applications on servlet container">
+
+		<list url="${manager.url}" username="${manager.username}" password="${manager.password}" />
+
+	</target>
+
+
+	<!-- ==================== Prepare Target ================================== -->
+
+	<target name="prepare">
+
+		<!-- Create build directories as needed -->
+		<mkdir dir="${build.home}" />
+		<mkdir dir="${build.home}/web" />
+		<mkdir dir="${build.home}/web/WEB-INF" />
+		<mkdir dir="${build.home}/web/WEB-INF/classes" />
+
+		<copy todir="${build.home}/web">
+			<fileset dir="${web.home}" />
+		</copy>
+		<mkdir dir="${build.home}/web/WEB-INF/lib" />
+
+	</target>
+
+
+	<!-- ==================== Reload Target =================================== -->
+
+	<target name="reload" depends="deploy" description="Reload application on servlet container">
+
+		<reload url="${manager.url}" username="${manager.username}" password="${manager.password}" path="${app.path}" />
+
+	</target>
+
+
+	<!-- ==================== Remove Target =================================== -->
+
+	<target name="remove" description="Remove application on servlet container">
+
+		
+		<undeploy url="${manager.url}" username="${manager.username}" password="${manager.password}" path="${app.path}" />
+
+	</target>
+
+</project>
