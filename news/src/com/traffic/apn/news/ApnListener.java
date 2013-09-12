@@ -1,6 +1,7 @@
 package com.traffic.apn.news;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,8 +15,8 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
 
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
+import oracle.jdbc.OraclePreparedStatement;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -28,7 +29,7 @@ public class ApnListener implements ServletContextListener {
 
 	private static final Logger log = Logger.getLogger(ApnListener.class);
 
-	@Resource(name = "java:jboss/datasources/ExampleDS")
+	@Resource(name = "java:jboss/datasources/TrafficDS")
 	private DataSource ds;
 
 	private Timer timer;
@@ -93,27 +94,42 @@ public class ApnListener implements ServletContextListener {
 	}
 
 	private void save(List<News> news) {
+		Connection conn = null;
+		OraclePreparedStatement ops = null;
 		try {
-			Connection conn = ds.getConnection();
-			QueryRunner qr = new QueryRunner();
-			Object params[][] = new Object[news.size()][];
-			for (int i = 0; i < news.size(); i++) {
-				params[i] = new Object[6];
-				News n = news.get(i);
-				params[i][0] = n.getLink();
-				params[i][1] = n.getType();
-				params[i][2] = n.getTitle();
-				params[i][3] = n.getSource();
-				params[i][4] = n.getSourceTime();
-				params[i][5] = n.getContent();
+			conn = DriverManager.getConnection(
+					ApnConfig.getInstance().getProperties()
+							.getProperty("apn.url"),
+					ApnConfig.getInstance().getProperties()
+							.getProperty("apn.username"),
+					ApnConfig.getInstance().getProperties()
+							.getProperty("apn.password"));
+			ops = (OraclePreparedStatement) conn
+					.prepareStatement("insert into news(id,link,newstype,title,source,sourcetime,content,status) values(news_seq.nextval,?,?,?,?,?,?,0)");
+
+			for (News n : news) {
+				ops.setString(1, n.getLink());
+				ops.setInt(2, n.getType());
+				ops.setString(3, n.getTitle());
+				ops.setString(4, n.getSource());
+				ops.setTimestamp(5, new java.sql.Timestamp(n.getSourceTime()
+						.getTime()));
+				ops.setStringForClob(6, n.getContent());
+				ops.addBatch();
 			}
-			qr.batch(
-					conn,
-					"insert into news(link,newstype,title,source,sourcetime,content,status) values(?,?,?,?,?,?,0)",
-					params);
+			ops.executeBatch();
 		} catch (SQLException e) {
 			log.error("save news errors", e);
+		} finally {
+
+			try {
+				if (ops != null)
+					ops.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+
+			}
 		}
 	}
-
 }

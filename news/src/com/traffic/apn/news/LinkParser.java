@@ -39,8 +39,8 @@ public class LinkParser {
 	}
 
 	// 通过正则表达式过滤一个网页上的所有链接
-	public List<String> filterLinks(String selector) {
-		List<String> links = new ArrayList<String>();
+	public Set<String> filterLinks(String selector) {
+		Set<String> links = new HashSet<String>();
 		try {
 			Parser parser = new Parser(url);
 			parser.setEncoding("gb2312");
@@ -126,7 +126,7 @@ public class LinkParser {
 		LinkParser parser = new LinkParser();
 		parser.setUrl(url);
 		parser.setUrlFilter(urlFilter);
-		links = parser.filterLinks("");
+		//links = parser.filterLinks("");
 		parser.removeDuplicateWithOrder(links);
 		// if(links.contains("http://sports.sina.com.cn/t/2011-07-14/05555657140.shtml")){
 		// System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");

@@ -1,7 +1,9 @@
 package com.traffic.apn.news;
 
+import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Properties;
 
 public class ApnConfig {
 
@@ -9,16 +11,27 @@ public class ApnConfig {
 
 	private final static ApnConfig intance = new ApnConfig();
 
-	
+	private Properties properties = null;
 
 	private ApnConfig() {
-		
+		init();
+	}
+
+	private void init() {
+		properties = new Properties();
+		try {
+			properties.load(new FileInputStream(getDefaultCommonConfigPath()
+					+ "/news.properties"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static ApnConfig getInstance() {
 
 		return intance;
 	}
+
 	/***
 	 * 获取默认的配置包目录绝对路径
 	 * 
@@ -46,6 +59,14 @@ public class ApnConfig {
 		}
 		return null;
 
+	}
+
+	public Properties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
 	}
 
 	/**

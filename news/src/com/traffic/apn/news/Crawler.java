@@ -1,8 +1,9 @@
 package com.traffic.apn.news;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -28,7 +29,7 @@ public class Crawler {
 		NewCollection newCollection = null;
 		LinkParser linkParser = new LinkParser();
 
-		List<String> list = new ArrayList<String>();
+		Set<String> list = new HashSet<String>();
 		if ("sina".equals(newSource)) {
 			ruleStrategy = new SinaRule();
 			newCollection = new SinaNewCollection();
@@ -39,17 +40,18 @@ public class Crawler {
 			linkParser.setUrl(url);
 			linkParser.setUrlFilter(urlFilter);
 			list = linkParser.filterLinks(ruleObject.getSelector());
-			for (int i = 0; i < list.size(); i++) {
+						
+			int i=0;
+			for (String s: list) {
 				if (i >= ruleObject.getLimit())
 					break;
-				News news = newCollection.parser((String) list.get(i));
+				News news = newCollection.parser(s);
 				if (news != null) {
-					news.setCollectDate(new Date());
+					//news.setCollectDate(new Date());
 					news.setType(Integer.valueOf(ruleObject.getNewsType()));
-
 					res.add(news);
 				}
-
+				i++;
 			}
 		} else {
 			log.error("Load ruleStrategy failed!");

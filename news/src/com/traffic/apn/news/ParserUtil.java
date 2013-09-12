@@ -42,7 +42,7 @@ public class ParserUtil{
     	for (int i = 0; i < nodeList.size(); i++) {
         	Node node = (Node) nodeList.elementAt(i);
         	NodeHTML = node.toHtml();
-//        	System.out.println("----------------");
+//			System.out.println("----------------");
 //        	System.out.println(NodeHTML);
         }
     	return NodeHTML;

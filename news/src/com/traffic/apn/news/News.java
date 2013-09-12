@@ -15,7 +15,7 @@ public class News {
 
 	private String title; // 新闻标题
 	private String source; // 新闻来源
-	private String sourceTime; // 新闻来源时间
+	private Date sourceTime; // 新闻来源时间
 	private String Content; // 新闻内容
 
 	private Date collectDate;
@@ -44,11 +44,13 @@ public class News {
 		this.source = source;
 	}
 
-	public String getSourceTime() {
+	
+
+	public Date getSourceTime() {
 		return sourceTime;
 	}
 
-	public void setSourceTime(String sourceTime) {
+	public void setSourceTime(Date sourceTime) {
 		this.sourceTime = sourceTime;
 	}
 
