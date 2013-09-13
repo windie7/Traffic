@@ -9,11 +9,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import javax.sql.DataSource;
 
 import oracle.jdbc.OraclePreparedStatement;
 
@@ -28,9 +26,6 @@ import org.apache.log4j.PropertyConfigurator;
 public class ApnListener implements ServletContextListener {
 
 	private static final Logger log = Logger.getLogger(ApnListener.class);
-
-	@Resource(name = "java:jboss/datasources/TrafficDS")
-	private DataSource ds;
 
 	private Timer timer;
 
@@ -73,7 +68,6 @@ public class ApnListener implements ServletContextListener {
 						RuleObject ruleObject = list.get(i);
 						List<News> news = crawler.crawler(ruleObject);
 						save(news);
-						// store news
 					}
 				} catch (Exception e) {
 					log.error("Init crawler rule file error", e);
@@ -101,23 +95,27 @@ public class ApnListener implements ServletContextListener {
 					ApnConfig.getInstance().getProperties()
 							.getProperty("apn.url"),
 					ApnConfig.getInstance().getProperties()
-							.getProperty("apn.username"),
+							.getProperty("apn.user"),
 					ApnConfig.getInstance().getProperties()
-							.getProperty("apn.password"));
+							.getProperty("apn.passpord"));
 			ops = (OraclePreparedStatement) conn
 					.prepareStatement("insert into news(id,link,newstype,title,source,sourcetime,content,status) values(news_seq.nextval,?,?,?,?,?,?,0)");
 
 			for (News n : news) {
-				ops.setString(1, n.getLink());
-				ops.setInt(2, n.getType());
-				ops.setString(3, n.getTitle());
-				ops.setString(4, n.getSource());
-				ops.setTimestamp(5, new java.sql.Timestamp(n.getSourceTime()
-						.getTime()));
-				ops.setStringForClob(6, n.getContent());
-				ops.addBatch();
+				try {
+					ops.setString(1, n.getLink());
+					ops.setInt(2, n.getType());
+					ops.setString(3, n.getTitle());
+					ops.setString(4, n.getSource());
+					ops.setTimestamp(5, new java.sql.Timestamp(n
+							.getSourceTime().getTime()));
+					ops.setStringForClob(6, n.getContent());
+					ops.executeUpdate();
+				} catch (SQLException e) {
+					
+				}
 			}
-			ops.executeBatch();
+
 		} catch (SQLException e) {
 			log.error("save news errors", e);
 		} finally {

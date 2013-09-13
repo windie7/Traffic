@@ -16,18 +16,14 @@ import org.dom4j.io.SAXReader;
  */
 public class RuleXmlParser {
 
-	public List<RuleObject> parserXml(String fileName) throws DocumentException, FileNotFoundException {
+	public List<RuleObject> parserXml(String fileName)
+			throws DocumentException, FileNotFoundException {
 		List<RuleObject> list = new ArrayList<RuleObject>();
 		// SAXReadr对象
 		SAXReader saxr = new SAXReader();
 
-		// 使用getResourceAsStream返回的是InputStream流对象
-		// 使用getResoruce返回是Java.net.url对象
-		/*Document document = saxr.read(RuleXmlParser.class.getClassLoader()
-				.getResourceAsStream(fileName));*/
-		
 		Document document = saxr.read(new FileInputStream(fileName));
-		
+
 		// 获得文档的根元素
 		Element rootElement = document.getRootElement();
 		// 遍历一级节点

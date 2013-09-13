@@ -7,16 +7,15 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.htmlparser.NodeFilter;
 import org.htmlparser.Parser;
 import org.htmlparser.filters.CssSelectorNodeFilter;
-import org.htmlparser.filters.NodeClassFilter;
 import org.htmlparser.filters.TagNameFilter;
 import org.htmlparser.tags.LinkTag;
 import org.htmlparser.util.NodeList;
 import org.htmlparser.util.ParserException;
 import org.htmlparser.visitors.HtmlPage;
-
 
 /**
  * 　*　 搜集新闻链接地址。将符合正则表达式的URL添加到URL数组中。 　
@@ -25,18 +24,7 @@ public class LinkParser {
 	private String url = "";
 	private String urlFilter = "http://mil.news.sina.com.cn/2011-07-21/[\\d]+.html";
 
-	// 去除list中重复的数据项
-	public static void removeDuplicateWithOrder(List arlList) {
-		Set set = new HashSet();
-		List newList = new ArrayList();
-		for (Iterator iter = arlList.iterator(); iter.hasNext();) {
-			Object element = iter.next();
-			if (set.add(element))
-				newList.add(element);
-		}
-		arlList.clear();
-		arlList.addAll(newList);
-	}
+	private static final Logger log = Logger.getLogger(LinkParser.class);
 
 	// 通过正则表达式过滤一个网页上的所有链接
 	public Set<String> filterLinks(String selector) {
@@ -52,8 +40,6 @@ public class LinkParser {
 			parser.visitAllNodesWith(page);
 			// 所有的节点
 			NodeList nodelist = page.getBody();
-
-			NodeClassFilter f = new NodeClassFilter();
 
 			if (StringUtils.isNotEmpty(selector)) {
 				CssSelectorNodeFilter csf = new CssSelectorNodeFilter(selector);
@@ -80,7 +66,7 @@ public class LinkParser {
 
 			}
 		} catch (ParserException e) {
-			e.printStackTrace();
+			log.error("Filter all link error,url=" + url, e);
 		}
 		return links;
 	}
@@ -126,11 +112,7 @@ public class LinkParser {
 		LinkParser parser = new LinkParser();
 		parser.setUrl(url);
 		parser.setUrlFilter(urlFilter);
-		//links = parser.filterLinks("");
-		parser.removeDuplicateWithOrder(links);
-		// if(links.contains("http://sports.sina.com.cn/t/2011-07-14/05555657140.shtml")){
-		// System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		// }
+
 		for (Iterator it = links.iterator(); it.hasNext();) {
 			System.out.println(it.next().toString());
 		}

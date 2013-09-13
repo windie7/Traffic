@@ -2,7 +2,7 @@
 <news>
 	<new source="sina">
 		<url>http://www.sina.com.cn/</url>
-		<urlFilter>http://news.sina.com.cn/[a-z]/yyyy-mm-dd/[\d]+.shtml</urlFilter>
+		<urlFilter>http://news.sina.com.cn(/[a-z])++/yyyy-mm-dd/[\d]+.shtml</urlFilter>
 		<newsType>1</newsType>
 		<limit>20</limit>
 		<selector>div.part-a-r</selector>		
@@ -40,15 +40,4 @@
 		<selector>div.p_right</selector>
 	</new>
 	
-	<!--
-	<new source="_163">
-		<url>http://sports.163.com/</url>
-		<urlFilter>http://sports.163.com/yyyy/mmdd/[\d]+/[\w]+.html</urlFilter>
-		<newsType>体育</newsType>
-	</new>
-	<new source="yahoo">
-		<url>http://mili.cn.yahoo.com/</url>
-		<urlFilter>http://mili.cn.yahoo.com/ypen/yyyymmdd/[\d]+.html</urlFilter>
-		<newsType>军事</newsType>
-	</new> -->
 </news>

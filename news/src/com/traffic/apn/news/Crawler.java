@@ -22,8 +22,9 @@ public class Crawler {
 		String urlFilter = ruleObject.getUrlFilter();
 		String newsType = ruleObject.getNewsType();
 		if (newsType == null) {
-			newsType = "";
+			newsType = "0";
 		}
+		int newType=Integer.valueOf(ruleObject.getNewsType());
 
 		RuleStrategy ruleStrategy = null;
 		NewCollection newCollection = null;
@@ -48,7 +49,7 @@ public class Crawler {
 				News news = newCollection.parser(s);
 				if (news != null) {
 					//news.setCollectDate(new Date());
-					news.setType(Integer.valueOf(ruleObject.getNewsType()));
+					news.setType(newType);
 					res.add(news);
 				}
 				i++;

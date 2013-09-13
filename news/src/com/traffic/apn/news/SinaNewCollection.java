@@ -75,6 +75,7 @@ public class SinaNewCollection implements NewCollection {
 			// childList.keepAllNodesThatMatch(new RegexFilter("　　相关专题"));
 
 			content = parserUtil.getNodeListHTML(ContentTimeNodeList);
+			//html or plain			
 			content = ParserUtil.getPlainText(content);
 			news.setContent(content);
 			parser.reset();
