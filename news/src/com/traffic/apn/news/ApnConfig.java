@@ -21,7 +21,7 @@ public class ApnConfig {
 		properties = new Properties();
 		try {
 			properties.load(new FileInputStream(getDefaultCommonConfigPath()
-					+ "/news.properties"));
+					+ "/pms.properties"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -51,7 +51,7 @@ public class ApnConfig {
 			final int posi = cpath.indexOf("deployments");
 			if (posi > 0) {
 				cpath = cpath.substring(0, posi);
-				cpath = cpath + "common/news_config/";
+				cpath = cpath + "common/pms_config/";
 			}
 			return cpath;
 		} catch (final UnsupportedEncodingException e) {

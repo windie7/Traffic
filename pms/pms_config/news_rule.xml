@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<news>
+	<new source="sina">
+		<url>http://www.sina.com.cn/</url>
+		<urlFilter>http://news.sina.com.cn(/[a-z])++/yyyy-mm-dd/[\d]+.shtml</urlFilter>
+		<newsType>1</newsType>
+		<limit>20</limit>
+		<selector>div.part-a-r</selector>		
+	</new>
+
+	<new source="sina">
+		<url>http://news.sina.com.cn/china/</url>
+		<urlFilter>http://news.sina.com.cn/c/yyyy-mm-dd/[\d]+.shtml</urlFilter>
+		<newsType>2</newsType>
+		<limit>10</limit>
+		<selector>div.p_l_r</selector>
+	</new>
+	
+	<new source="sina">
+		<url>http://news.sina.com.cn/world/</url>
+		<urlFilter>http://news.sina.com.cn/w/yyyy-mm-dd/[\d]+.shtml</urlFilter>
+		<newsType>3</newsType>
+		<limit>10</limit>
+		<selector>div.p_l_r</selector>
+	</new>
+	
+ 	<new source="sina">
+		<url>http://news.sina.com.cn/society/</url>
+		<urlFilter>http://news.sina.com.cn/s/yyyy-mm-dd/[\d]+.shtml</urlFilter>
+		<newsType>4</newsType>
+		<limit>10</limit>
+		<selector>td.td_2</selector>
+	</new>
+	
+	<new source="sina">
+		<url>http://ent.sina.com.cn/</url>
+		<urlFilter>http://ent.sina.com.cn/[a-z]/[a-z]/yyyy-mm-dd/[\d]+.shtml</urlFilter>
+		<newsType>5</newsType>
+		<limit>10</limit>
+		<selector>div.p_right</selector>
+	</new>
+	
+</news>
