@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/Login")
+@WebServlet(value = { "/Login", "/api" })
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -62,9 +62,9 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String op = request.getParameter("op");
-		if (StringUtil.isEmpty(op))
-			return;
-		if (op.equalsIgnoreCase("code")) {
+		if (StringUtil.isEmpty(op)) {
+			this.doApi(request, response, op);
+		} else if (op.equalsIgnoreCase("code")) {
 			this.doCode(request, response, op);
 		} else if (op.equalsIgnoreCase("login")) {
 			this.doLogin(request, response, op);
@@ -172,5 +172,11 @@ public class LoginServlet extends HttpServlet {
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 
 		return;
+	}
+
+	// 0:success 1:invalid mobile 2:invalid code 3:code expires
+	private void doApi(HttpServletRequest request,
+			HttpServletResponse response, String op) throws ServletException,
+			IOException {
 	}
 }
