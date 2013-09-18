@@ -1,7 +1,6 @@
 package com.traffic.apn;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -16,11 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet(value = { "/Login", "/api" })
+@WebServlet(value = { "/login", "/api/signin" })
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -161,6 +163,8 @@ public class LoginServlet extends HttpServlet {
 					msg = "验证码超时";
 				} else {
 					msg = "登录成功";
+
+					dao.saveLogin(user.getId(), LoginBean.agent_page);
 					// call pass apn
 					// redirect?
 					// response.sendRedirect("http://www.baidu.com");
@@ -174,9 +178,51 @@ public class LoginServlet extends HttpServlet {
 		return;
 	}
 
-	// 0:success 1:invalid mobile 2:invalid code 3:code expires
+	// 0:success 1:invalid parameter 2:register error 3:invalid app
 	private void doApi(HttpServletRequest request,
 			HttpServletResponse response, String op) throws ServletException,
 			IOException {
+
+		SignIn s = new ObjectMapper().readValue(request.getInputStream(),
+				SignIn.class);
+		int status = 0;
+		String mobile = s.getPn();
+		String imei = s.getImsi();
+		String sign = s.getSigned();
+		if (!StringUtil.isMobile(mobile) || StringUtil.isEmpty(sign)
+				|| StringUtil.isEmpty(imei)) {
+			status = 1;
+			new ObjectMapper().writeValue(response.getOutputStream(), status);
+			return;
+		}
+
+		if (!checkSign(mobile, imei, sign)) {
+			status = 3;
+			new ObjectMapper().writeValue(response.getOutputStream(), status);
+			return;
+		}
+
+		UserBean user = dao.getUserByMobile(mobile);
+		if (user == null) {
+			user = new UserBean();
+			user.setMobile(mobile);
+			user.setImei("");
+			user.setCreatedate(System.currentTimeMillis());
+			int id = dao.createUser(user);
+			if (id < 0) {
+				status = 2;
+				new ObjectMapper().writeValue(response.getOutputStream(),
+						status);
+			}
+			user.setId(id);
+		}
+		dao.saveLogin(user.getId(), LoginBean.agent_app);
+		status = 0;
+		new ObjectMapper().writeValue(response.getOutputStream(), status);
+		return;
+	}
+
+	private boolean checkSign(String mobile, String imei, String sign) {
+		return true;
 	}
 }

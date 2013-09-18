@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.log4j.Logger;
 
 public class ApnDao {
@@ -28,21 +29,27 @@ public class ApnDao {
 		return person;
 	}
 
-	public boolean createUser(UserBean user) {
+	public int createUser(UserBean user) {
+		int id = -1;
 		Connection conn = DBHelper.GetInstance();
 		QueryRunner qr = new QueryRunner();
 		try {
+			conn.setAutoCommit(false);
 			qr.update(conn,
 					"insert into users(mobile,imei,createdate) values(?,?,?)",
-					user.getMobile(), user.getImei(),user.getCreatedate());
+					user.getMobile(), user.getImei(), user.getCreatedate());
 
+			id = ((Long) qr.query(conn, "SELECT LAST_INSERT_ID()",
+					new ScalarHandler(1))).intValue();
+
+			conn.commit();
 		} catch (SQLException e) {
 			log.error("create user errors", e);
-			return false;
+			return id;
 		} finally {
 			DBHelper.ReleaseInstance(conn);
 		}
-		return true;
+		return id;
 	}
 
 	public boolean saveCode(String code, String mobile) {
@@ -62,14 +69,14 @@ public class ApnDao {
 		return true;
 	}
 
-	public boolean saveLogin(LoginBean login) {
+	public boolean saveLogin(int userid, int agent) {
 		Connection conn = DBHelper.GetInstance();
 		QueryRunner qr = new QueryRunner();
 		try {
 			qr.update(
 					conn,
 					"insert into userlogin(userid,agent,logindate) values(?,?,?)",
-					login.getUserid(), login.getAgent(), login.getLogindate());
+					userid, agent, System.currentTimeMillis());
 
 		} catch (SQLException e) {
 			log.error("save login record errors", e);

@@ -1,0 +1,121 @@
+/* CSS Document */
+html {
+	FONT:12px "microsoft yahei", arial, 宋体;
+}
+body {
+	margin:0;
+	color:#333333;
+	line-height:200%;
+	min-width:320px;
+	width:100%;
+}
+a {
+	color:#333333;
+	text-decoration:none;
+}
+* {
+	padding:0;
+	margin:0
+}
+img {
+	border:none;
+	width:100%;
+}
+.contain {
+	width:100%;
+}
+.ad img {
+	width:100%;
+}
+.safe_logo {
+	padding-top:60px;
+	padding-bottom:10px;
+	text-align:center
+}
+.safe_logo img {
+	width:50%;
+}
+.flash {
+	text-align:center
+}
+.flash img {
+	width:80%;
+}
+.past {
+	text-align:right;
+	width:80%;
+	margin:0 auto;
+	padding-top:10px;
+}
+.past a {
+	display:block;
+	background:url(../images/past.png) no-repeat right center;
+	padding-right:30px;
+	font-size:18px;
+	color:#1565A4
+}
+.bottom_bg {
+	width:100%;
+	height:150px;
+	background:url(../images/bg.png);
+	margin-top:50px;
+}
+.left, .right {
+	float:left;
+}
+.right {
+	padding-left:15px;
+}
+.clear {
+	clear:both;
+	height:0px;
+	width:100%;
+}
+.getcode, .input {
+	padding-top:20px;
+	font-size:15px;
+}
+.right input {
+	height:28px;
+	line-height:28px;
+	border:solid 1px #828282;
+	width:175px;
+}
+.getcode input.button {
+	background:#1665A0;
+	border:none;
+}
+.getcode .border {
+	float:left;
+}
+.getcode .words a {
+	display:block;
+	color:#fff;
+}
+.getcode .words {
+	background:#1665A0;
+	width:110px;
+	float:left;
+	height:38px;
+	line-height:38px;
+	text-align:center
+}
+.margin {
+	width:320px;
+	margin: 0 auto;
+}
+.getcode .right {
+	line-height:38px;
+}
+.notice {
+	color:#FF0204;
+	text-align:right;
+	padding:5px 0;
+	width:280px;
+}
+.getcode .words.wid {
+	width:258px;
+}
+.ad {
+	padding-top:15px;
+}
