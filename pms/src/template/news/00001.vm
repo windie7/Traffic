@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<HTML>
+<HEAD>
+<TITLE>$news.title</TITLE>
+<META content=text/html;charset=UTF-8 http-equiv=Content-Type />
+<META content=max-age=3600 http-equiv=Cache-Control />
+<META name=MobileOptimized content=240 />
+<META name=apple-touch-fullscreen content=YES />
+<META name=apple-mobile-web-app-capable content=yes />
+<META name=viewport content="width=device-width, initial-scale=1.0,  minimum-scale=1.0, maximum-scale=1.0">
+<META name=keywords content="" />
+<META name=description content="" />
+<META name=GENERATOR content="MSHTML 8.00.6001.23501">
+<link type="text/css" rel="stylesheet" href="../../css/app_news_style.css" />
+</HEAD>
+<script type="text/javascript" src="../../js/inner_check.js"></script>
+
+<body >
+<header>
+  <div id="header">
+    <div class="clear"></div>
+    <div class="position">
+      <div class="left"><a href="../../index.html">E路巴</a> > <a href="../index.html">资讯</a> </div>
+      <div class="right"><a href="#"><img src="../../images/down.png"></a></div>
+      <div class="clear"></div>
+    </div>
+  </div>
+</header>
+<div id="contain">
+  <div class="ad"><a href="#" target="_blank"><img src="../../mmdata/banner/ad.png" alt="" /></a></div>
+  <div class="news_content">
+    <div class="title">$news.title</div>
+    <div class="info">$news.source&nbsp;&nbsp;$news.sourceTime</div>
+    <div class="content">
+      $news.content
+    </div>
+  <div class="clear"></div> 
+    
+    <div class="links grey">
+    <p><a href="">e路网 一路快乐上网！</a></p> 
+    </div>
+    <div class="links grey"> 
+    <p><a href="">快乐出行，轻松上网！</a></p>
+    </div>
+    <div class="tuijian">
+    	<div class="title">特别推荐</div>
+        <ul>	
+        	<li><p><a href=""><img src="../../mmdata/banner/tuijian.png" alt="" /></a></p><p class="name">一路快乐上网</p></li>
+            <li><p><a href=""><img src="../../mmdata/banner/tuijian.png" alt="" /></a></p><p class="name">安全出行，平安一生</p></li>
+            <li><p><a href=""><img src="../../mmdata/banner/tuijian.png" alt="" /></a></p><p class="name">e路吧欢迎您</p></li>
+        </ul>
+    </div>
+    
+  </div>
+  <div class="clear"></div>
+    <div class="ad"><a href="#" target="_blank"><img src="../../mmdata/banner/ad.png" alt="" /></a></div>
+
+</div>
+<iframe src="../foot.html" frameborder="0" scrolling="no" style="width:100%; height:150px; overflow:hidden"></iframe>
+</body>
+</html>

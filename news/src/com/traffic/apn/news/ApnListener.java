@@ -47,7 +47,7 @@ public class ApnListener implements ServletContextListener {
 		PropertyConfigurator.configureAndWatch(conf + "/log4j.properties", 120);
 
 		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.HOUR_OF_DAY, 10);
+		cal.set(Calendar.HOUR_OF_DAY, 7);
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
 		Date first = cal.getTime();

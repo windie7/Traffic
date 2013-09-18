@@ -4,21 +4,25 @@ import java.util.Date;
 
 public class News {
 
-	public static final int type_slotline = 1;
-	public static final int type_china = 2;
-	public static final int type_world = 3;
-	public static final int type_society = 4;
-	public static final int type_ent = 5;
-
+	private int id;
 	private String link;
-	private int type;
+	private int newstype;
 
 	private String title; // 新闻标题
 	private String source; // 新闻来源
 	private Date sourceTime; // 新闻来源时间
-	private String Content; // 新闻内容
+	private String content; // 新闻内容
 
-	private Date collectDate;
+	private int status;
+	private Date collecttime;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getLink() {
 		return link;
@@ -44,8 +48,6 @@ public class News {
 		this.source = source;
 	}
 
-	
-
 	public Date getSourceTime() {
 		return sourceTime;
 	}
@@ -55,27 +57,36 @@ public class News {
 	}
 
 	public String getContent() {
-		return Content;
+		return content;
 	}
 
 	public void setContent(String content) {
-		Content = content;
+		this.content = content;
 	}
 
-	public Date getCollectDate() {
-		return collectDate;
+	public int getNewstype() {
+		return newstype;
 	}
 
-	public void setCollectDate(Date collectDate) {
-		this.collectDate = collectDate;
+	public void setNewstype(int newstype) {
+		this.newstype = newstype;
 	}
 
-	public int getType() {
-		return type;
+	public int getStatus() {
+		return status;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public void setStatus(int status) {
+		this.status = status;
 	}
+
+	public Date getCollecttime() {
+		return collecttime;
+	}
+
+	public void setCollecttime(Date collecttime) {
+		this.collecttime = collecttime;
+	}
+
 
 }

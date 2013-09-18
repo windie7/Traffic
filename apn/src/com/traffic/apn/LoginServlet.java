@@ -206,7 +206,7 @@ public class LoginServlet extends HttpServlet {
 		if (user == null) {
 			user = new UserBean();
 			user.setMobile(mobile);
-			user.setImei("");
+			user.setImei(imei);
 			user.setCreatedate(System.currentTimeMillis());
 			int id = dao.createUser(user);
 			if (id < 0) {

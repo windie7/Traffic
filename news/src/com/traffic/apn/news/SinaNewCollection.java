@@ -1,5 +1,6 @@
 package com.traffic.apn.news;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import org.apache.log4j.Logger;
@@ -21,7 +22,7 @@ public class SinaNewCollection implements NewCollection {
 	private static final Logger log = Logger.getLogger(SinaNewCollection.class);
 
 	private static final SimpleDateFormat sdf = new SimpleDateFormat(
-			"yyyy-mm-dd hh:mm");
+			"yyyy-MM-dd hh:mm");
 
 	/**
 	 * 对新闻URL进行解析并采集数据
@@ -87,9 +88,11 @@ public class SinaNewCollection implements NewCollection {
 		return news;
 	}
 
-	public static void main(String[] args) {
-		SinaNewCollection newCollection = new SinaNewCollection();
+	public static void main(String[] args) throws ParseException {
+		System.out.println(sdf.parse("2013-09-18 04:20"));
+
+		/*SinaNewCollection newCollection = new SinaNewCollection();
 		newCollection
-				.parser("http://tech.sina.com.cn/d/2011-07-28/09485850149.shtml");
+				.parser("http://tech.sina.com.cn/d/2011-07-28/09485850149.shtml");*/
 	}
 }

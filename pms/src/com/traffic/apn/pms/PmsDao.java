@@ -2,30 +2,35 @@ package com.traffic.apn.pms;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.log4j.Logger;
 
 public class PmsDao {
 
 	private final static Logger log = Logger.getLogger(PmsDao.class);
-/*
-	public News getUserByMobile(String mobile) {
+
+	public List<News> getNewsByDate(Date start, Date end) {
 		Connection conn = DBHelper.GetInstance();
 		QueryRunner qr = new QueryRunner();
-		UserBean person = null;
+		List<News> list = null;
 		try {
-			person = (UserBean) qr.query(conn,
-					"select * from users where mobile=?", new BeanHandler(
-							UserBean.class), mobile);
+			
+			list = qr.query(conn,
+					"select * from news where sourcetime>=? and sourcetime<?",
+					new BeanListHandler(News.class),
+					new java.sql.Timestamp(start.getTime()),
+					new java.sql.Timestamp(end.getTime()));
 
 		} catch (SQLException e) {
-			log.error("load user errors", e);
+			log.error("load news errors", e);
 		} finally {
 			DBHelper.ReleaseInstance(conn);
 		}
-		return person;
-	}*/
+		return list;
+	}
 
 }
