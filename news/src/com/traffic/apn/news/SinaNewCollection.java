@@ -77,10 +77,11 @@ public class SinaNewCollection implements NewCollection {
 
 			content = parserUtil.getNodeListHTML(ContentTimeNodeList);
 			//html or plain			
+			content=content.replace("<p>", "ggggggggggg").replace("</p>", "hhhhhhhhhhhh");
 			content = ParserUtil.getPlainText(content);
+			content=content.replace("ggggggggggg","<p>").replace("hhhhhhhhhhhh", "</p>");
 			news.setContent(content);
 			parser.reset();
-
 		} catch (Exception e) {
 			log.error("parsing news error, link=" + url, e);
 			return null;
@@ -90,9 +91,13 @@ public class SinaNewCollection implements NewCollection {
 
 	public static void main(String[] args) throws ParseException {
 		System.out.println(sdf.parse("2013-09-18 04:20"));
+		
+		 String src = new String("ab43a<p>43d");
+	        System.out.println(src.replace("<p>","f"));
 
-		/*SinaNewCollection newCollection = new SinaNewCollection();
-		newCollection
-				.parser("http://tech.sina.com.cn/d/2011-07-28/09485850149.shtml");*/
+
+		SinaNewCollection newCollection = new SinaNewCollection();
+		System.out.println(newCollection
+				.parser("http://tech.sina.com.cn/d/2011-07-28/09485850149.shtml").getContent());
 	}
 }

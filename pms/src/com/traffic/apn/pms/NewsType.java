@@ -3,7 +3,7 @@ package com.traffic.apn.pms;
 public enum NewsType {
 
 	none(0, "", ""), slot(1, "头条", "headline"), china(2, "国内", "china"), world(
-			3, "国际", "world"), society(4, "社会", "society"), en(5, "专题", "ent");
+			3, "国际", "world"), society(4, "社会", "society"), en(5, "娱乐", "ent");
 
 	public static final int type_slotline = 1;
 	public static final int type_china = 2;

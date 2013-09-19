@@ -39,7 +39,12 @@
   <div class="clear"></div>
   <div class="newslist">
     <ul>
+      #set( $i = 0 )
   	  #foreach( $news in $entry.value )  
+  	  	#set( $i =$i+1  )	
+  	  	#if($i==5)
+          #break
+  		#end
   	  	#set( $link = $dir+"/"+$news.id+".html" )
       <li><a href="$link">[$entry.key.name]&nbsp;$news.title</a></li>
   	  #end    

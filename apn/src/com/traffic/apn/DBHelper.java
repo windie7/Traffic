@@ -17,7 +17,7 @@ public class DBHelper {
 	
 	private static String dbFile="";
 	
-	private static int poolSize=10;
+	private static int poolSize=5;
 			
 	public static void init(String dbFileName,int size) {
 		dbFile=dbFileName;

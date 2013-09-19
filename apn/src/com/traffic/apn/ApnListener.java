@@ -28,7 +28,7 @@ public class ApnListener implements ServletContextListener {
 				
 		PropertyConfigurator.configureAndWatch(conf+"/log4j.properties", 120);
 		
-		DBHelper.init(conf+"/apn.db",10);
+		DBHelper.init(conf+"/apn.db",3);
 	}
 
 	/**

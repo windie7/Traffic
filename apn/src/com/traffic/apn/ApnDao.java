@@ -32,17 +32,15 @@ public class ApnDao {
 	public int createUser(UserBean user) {
 		int id = -1;
 		Connection conn = DBHelper.GetInstance();
-		QueryRunner qr = new QueryRunner();
+		QueryRunner qr = new QueryRunner();		
 		try {
-			conn.setAutoCommit(false);
 			qr.update(conn,
 					"insert into users(mobile,imei,createdate) values(?,?,?)",
 					user.getMobile(), user.getImei(), user.getCreatedate());
 
-			id = ((Long) qr.query(conn, "SELECT LAST_INSERT_ID()",
-					new ScalarHandler(1))).intValue();
+			id = qr.query(conn, "SELECT last_insert_rowid()",
+					new ScalarHandler(1));
 
-			conn.commit();
 		} catch (SQLException e) {
 			log.error("create user errors", e);
 			return id;
@@ -73,10 +71,10 @@ public class ApnDao {
 		Connection conn = DBHelper.GetInstance();
 		QueryRunner qr = new QueryRunner();
 		try {
-			qr.update(
-					conn,
-					"insert into userlogin(userid,agent,logindate) values(?,?,?)",
-					userid, agent, System.currentTimeMillis());
+			int ret = qr
+					.update(conn,
+							"insert into userlogin(userid,agent,logindate) values(?,?,?)",
+							userid, agent, System.currentTimeMillis());
 
 		} catch (SQLException e) {
 			log.error("save login record errors", e);

@@ -143,8 +143,9 @@ public class ApnListener implements ServletContextListener {
 				}
 
 				File f = new File(dir, news.getId() + ".html");
-				if (!f.exists())
-					f.createNewFile();
+				if (f.exists())
+					f.delete();
+				f.createNewFile();
 
 				FileWriter fos = new FileWriter(f);
 				fos.write(sw.getBuffer().toString());

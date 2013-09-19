@@ -112,7 +112,7 @@ public class ApnListener implements ServletContextListener {
 					ops.setStringForClob(6, n.getContent());
 					ops.executeUpdate();
 				} catch (SQLException e) {
-					
+					log.error("save news errors but continue", e);
 				}
 			}
 

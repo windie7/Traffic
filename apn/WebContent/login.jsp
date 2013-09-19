@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf8"
 	pageEncoding="utf8"%>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
-<HTML>
-<HEAD>
-<TITLE>登录页面</TITLE>
+<html>
+<head>
+<title>登录页面</title>
 <META content=text/html;charset=UTF-8 http-equiv=Content-Type />
 <META content=max-age=3600 http-equiv=Cache-Control />
 <META name=MobileOptimized content=240 />
@@ -16,7 +16,7 @@
 <META name=GENERATOR content="MSHTML 8.00.6001.23501" />
 <link type="text/css" rel="stylesheet" href="css/login.css" />
 <script type="text/javascript" src="js/check.js"></script>
-<script src="scripts/jquery-1.7.1.min.js"></script>
+<script src="js/jquery-1.7.1.min.js"></script>
 
 <script type="text/javascript">
 	var context = "/apn";
@@ -31,6 +31,7 @@
 
 			if (!pMobile.test(m)) {
 				$("#tip_code").text("请输入有效手机号码");
+				
 				return;
 			}
 
@@ -119,7 +120,7 @@
 							<img src="images/title_left.png" alt="" />
 						</div>
 						<div class="words">
-							<a id="i_code" href="#">获取短信验证码</a>
+							<a id="i_code" href="javascript:void(0)">获取短信验证码</a>
 						</div>
 						<div class="border">
 							<img src="images/title_right.png" alt="" />
@@ -141,7 +142,7 @@
 						<img src="images/title_left.png" alt="" />
 					</div>
 					<div class="words wid">
-						<a id="i_login" href="#">访问</a>
+						<a id="i_login" href="javascript:void(0)">访问</a>
 					</div>
 					<div class="border">
 						<img src="images/title_right.png" alt="" />
