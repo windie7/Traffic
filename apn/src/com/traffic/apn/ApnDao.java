@@ -38,8 +38,8 @@ public class ApnDao {
 					"insert into users(mobile,imei,createdate) values(?,?,?)",
 					user.getMobile(), user.getImei(), user.getCreatedate());
 
-			id = qr.query(conn, "SELECT last_insert_rowid()",
-					new ScalarHandler(1));
+			id = ((Integer)(qr.query(conn, "SELECT last_insert_rowid()",
+					new ScalarHandler(1)))).intValue();
 
 		} catch (SQLException e) {
 			log.error("create user errors", e);

@@ -28,7 +28,7 @@ public class DBHelper {
 				mInstancePool.push(newConn(dbFile));
 			}
 		} catch (ClassNotFoundException e) {
-
+			e.printStackTrace();
 		}
 	}
 

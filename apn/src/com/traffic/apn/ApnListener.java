@@ -23,12 +23,9 @@ public class ApnListener implements ServletContextListener {
 	 * @see ServletContextListener#contextInitialized(ServletContextEvent)
 	 */
 	public void contextInitialized(ServletContextEvent arg0) {
-		
-		String conf=ApnConfig.getInstance().getDefaultCommonConfigPath();
-				
-		PropertyConfigurator.configureAndWatch(conf+"/log4j.properties", 120);
-		
-		DBHelper.init(conf+"/apn.db",3);
+		String conf = ApnConfig.getInstance().getDefaultCommonConfigPath();
+		PropertyConfigurator.configureAndWatch(conf + "/log4j.properties", 120);
+		DBHelper.init(conf + "/apn.db", 3);
 	}
 
 	/**
@@ -37,6 +34,5 @@ public class ApnListener implements ServletContextListener {
 	public void contextDestroyed(ServletContextEvent arg0) {
 
 	}
-	
-	
+
 }

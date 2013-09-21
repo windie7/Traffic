@@ -1,24 +1,36 @@
 package com.traffic.apn;
 
+import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Properties;
 
 public class ApnConfig {
 
 	private static String defaultCommonConfigPath = null;
-
 	private final static ApnConfig intance = new ApnConfig();
 
-	
+	private Properties properties = null;
 
 	private ApnConfig() {
-		
+		init();
+	}
+
+	private void init() {
+		properties = new Properties();
+		try {
+			properties.load(new FileInputStream(getDefaultCommonConfigPath()
+					+ "/apn.properties"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static ApnConfig getInstance() {
 
 		return intance;
 	}
+
 	/***
 	 * 获取默认的配置包目录绝对路径
 	 * 
@@ -46,6 +58,18 @@ public class ApnConfig {
 		}
 		return null;
 
+	}
+
+	public Properties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
+
+	public static ApnConfig getIntance() {
+		return intance;
 	}
 
 	/**

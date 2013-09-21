@@ -38,7 +38,9 @@ public class CommonUtil {
 	public static boolean openAccess(String ip, String mobile) {
 		// call pass apn
 		try {
-			String cmd[] = { "/home/root/openAccess", ip, mobile, "" };
+			String cmd[] = {
+					ApnConfig.getInstance().getProperties()
+							.getProperty("net.exe"), ip, mobile, "" };
 			Process p = Runtime.getRuntime().exec(cmd);
 			int ret = p.waitFor();
 			log.info("open access ret=" + ret + ",mobile=" + mobile + ",ip="

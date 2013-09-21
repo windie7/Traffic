@@ -19,7 +19,7 @@ var browser={
 } 
    
 if(browser.versions.mobile==false){
-   document.write('<link rel="stylesheet" type="text/css" href="css/web_style.css" />');
+  document.write('<link rel="stylesheet" type="text/css" href="css/web_style.css" />');
 }
  
  

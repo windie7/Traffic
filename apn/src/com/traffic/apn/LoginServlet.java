@@ -102,8 +102,11 @@ public class LoginServlet extends HttpServlet {
 						log.info("Sent message to mobile=" + mobile + ", code="
 								+ code);
 						try {
-							String cmd[] = { "/root/sms/sendsms",
-									"/dev/ttyACM0", mobile,
+							String cmd[] = {
+									ApnConfig.getInstance().getProperties()
+											.getProperty("sms.exe"),
+									ApnConfig.getInstance().getProperties()
+											.getProperty("sms.dev"), mobile,
 									" 您好，欢迎使用客运大巴无线接入，你的登陆验证码为" + code + "。" };
 
 							Process p = Runtime.getRuntime().exec(cmd);

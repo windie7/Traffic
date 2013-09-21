@@ -145,7 +145,7 @@
 		<mkdir dir="${dist.home}" />
 		
 		<!-- Create application JAR file -->
-		<jar jarfile="${dist.home}/TrafficApn.war" basedir="${build.home}/web" />
+		<jar jarfile="${dist.home}/apn.war" basedir="${build.home}/web" />
 
 		<!--
 	<war destfile="${dist.home}/${app.name}.war"

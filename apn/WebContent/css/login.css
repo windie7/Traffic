@@ -35,12 +35,15 @@ img {
 .safe_logo img {
 	width:50%;
 }
+.safe_logo.w30 img{ width:30%;}
 .flash {
-	text-align:center
+	text-align:center;
+	position:relative;
 }
-.flash img {
+.flash img.flashimg {
 	width:80%;
 }
+.flash .ico{ position:absolute; top:35%; left:40%; width:20%}
 .past {
 	text-align:right;
 	width:80%;
@@ -93,7 +96,7 @@ img {
 	color:#fff;
 }
 .getcode .words {
-	background:#1665A0;
+	background:url(../images/title_center.png);
 	width:110px;
 	float:left;
 	height:38px;
@@ -116,6 +119,50 @@ img {
 .getcode .words.wid {
 	width:258px;
 }
-.ad {
+.ad.p10 {
 	padding-top:15px;
 }
+
+li {
+	list-style:none;
+}
+
+#foot ul{ margin:0 auto}
+#foot ul, #foot li { 
+	padding:0
+}
+#foot .foot_catelist {
+	width:100%;
+}
+#foot .foot_catelist ul {
+	width:100%;
+}
+#foot .foot_catelist li {
+	float:left;
+	width:20%;
+	line-height:250%;
+}
+#foot .foot_catelist li.now {
+	background:#fff;
+}
+#foot .foot_catelist li.now a {
+	color:#000
+}
+#foot .foot_catelist li a {
+	text-align:center;
+	display:block;
+	color:#fff;
+}
+#foot .ad {
+	width:100%;
+	margin:0 auto
+}
+#foot .foot_catelist {
+	width:100%;
+	margin:10px auto 0;
+	background:#ECECEC;
+}
+#foot .foot_catelist li a {
+	color:#000
+}
+.notice_words{ width:50%; margin: 0 auto; color:#1565A2; padding:50px 0; font-size:16px}
