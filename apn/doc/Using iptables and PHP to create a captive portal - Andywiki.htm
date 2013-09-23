@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<!-- saved from url=(0082)http://www.andybev.com/index.php/Using_iptables_and_PHP_to_create_a_captive_portal -->
+<html lang="en" dir="ltr" class="client-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Using iptables and PHP to create a captive portal - Andywiki</title>
+<meta charset="UTF-8">
+<meta name="generator" content="MediaWiki 1.20.7">
+<link rel="shortcut icon" href="http://www.andybev.com/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="http://www.andybev.com/opensearch_desc.php" title="Andywiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="http://www.andybev.com/api.php?action=rsd">
+<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html">
+<link rel="alternate" type="application/atom+xml" title="Andywiki Atom feed" href="http://www.andybev.com/index.php?title=Special:RecentChanges&feed=atom">
+<link rel="stylesheet" href="http://www.andybev.com/load.php?debug=false&lang=en&modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.monobook&only=styles&skin=monobook&*">
+<!--[if IE 6]><link rel="stylesheet" href="/skins/monobook/IE60Fixes.css?303" media="screen" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="/skins/monobook/IE70Fixes.css?303" media="screen" /><![endif]--><style>.mw-collapsible-toggle{float:right} li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:4250852ed2349a0d4d0fc6509a3e7d4c */.suggestions{overflow:hidden;position:absolute;top:0;left:0;width:0;border:none;z-index:1099;padding:0;margin:-1px -1px 0 0} html > body .suggestions{margin:-1px 0 0 0}.suggestions-special{position:relative;background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0;margin-top:-2px;display:none;padding:0.25em 0.25em;line-height:1.25em}.suggestions-results{background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0}.suggestions-result{color:black;margin:0;line-height:1.5em;padding:0.01em 0.25em;text-align:left}.suggestions-result-current{background-color:#4C59A6;color:white}.suggestions-special .special-label{color:gray;text-align:left}.suggestions-special .special-query{color:black;font-style:italic;text-align:left}.suggestions-special .special-hover{background-color:silver}.suggestions-result-current .special-label,.suggestions-result-current .special-query{color:white}.autoellipsis-matched,.highlight{font-weight:bold}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:9780324491b653a3780e2d029bdc140c */</style><meta name="ResourceLoaderDynamicStyles" content="">
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: wikidb:resourceloader:filter:minify-css:7:7a3748d34e6456ae8d0f053363f745f7 */</style>
+
+<script src="./Using iptables and PHP to create a captive portal - Andywiki_files/load.php"></script><style type="text/css"></style><script src="./Using iptables and PHP to create a captive portal - Andywiki_files/load(1).php"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Using_iptables_and_PHP_to_create_a_captive_portal","wgTitle":"Using iptables and PHP to create a captive portal","wgCurRevisionId":1300,"wgArticleId":2,"wgIsArticle":true,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Using_iptables_and_PHP_to_create_a_captive_portal","wgRestrictionEdit":["sysop"],"wgRestrictionMove":["sysop"]});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function(){mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"monobook","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,
+"watchlisthideanons":0,"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;},{},{});mw.loader.implement("user.tokens",function(){mw.user.tokens.set({"editToken":"+\\","watchToken":false});;},{},{});
+/* cache key: wikidb:resourceloader:filter:minify-js:7:c89fc005766e312c555f83b307d08d63 */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax"]);
+}</script><script type="text/javascript" src="./Using iptables and PHP to create a captive portal - Andywiki_files/load(2).php"></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Using_iptables_and_PHP_to_create_a_captive_portal skin-monobook action-view" ryt11668="1">
+<div id="globalWrapper">
+<div id="column-content"><div id="content" class="mw-body-primary">
+	<a id="top"></a>
+	
+	<h1 id="firstHeading" class="firstHeading"><span dir="auto">Using iptables and PHP to create a captive portal</span></h1>
+	<div id="bodyContent" class="mw-body">
+		<div id="siteSub">From Andywiki</div>
+		<div id="contentSub"></div>
+		<div id="jump-to-nav" class="mw-jump">Jump to: <a href="http://www.andybev.com/index.php/Using_iptables_and_PHP_to_create_a_captive_portal#column-one">navigation</a>, <a href="http://www.andybev.com/index.php/Using_iptables_and_PHP_to_create_a_captive_portal#searchInput">search</a></div>
+		<!-- start content -->
+<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><table style="background-color:#ffffcc;" cellpadding="10" cellspacing="0" border="1" width="100%">
+<tbody><tr>
+<td>Unfortunately I have had to lock this page, due to the amount of spam it received. If you would like to make a contribution, please email me, andy@andybev.com
+</td></tr></tbody></table>
+<p>There are various captive portal software packages available (both free and open source) that will allow you to setup an internet access facility that people have to logon to first. None of the packages I tried did what I wanted and they were not particularly customisable. Therefore I created my own, using a few iptables rules and PHP (along with a handful of other standard packages). This page details the steps that were taken. The key to this method as opposed to other iptables based solutions is that tracking information is removed after the user has signed up. Failure to do this will sometimes cause the user to still be redirected to your logon page even after they have signed up.
+</p><p><br>
+</p>
+<table id="toc" class="toc"><tbody><tr><td><div id="toctitle"><h2>Contents</h2><span class="toctoggle">&nbsp;[<a href="http://www.andybev.com/index.php/Using_iptables_and_PHP_to_create_a_captive_portal#" class="internal" id="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="http://www.andybev.com/index.php/Using_iptables_and_PHP_to_create_a_captive_portal#Software_required"><span class="tocnumber">1</span> <span class="toctext">Software required</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="http://www.andybev.com/index.php/Using_iptables_and_PHP_to_create_a_captive_portal#Principle_of_operation"><span class="tocnumber">2</span> <span class="toctext">Principle of operation</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="http://www.andybev.com/index.php/Using_iptables_and_PHP_to_create_a_captive_portal#The_users_files"><span class="tocnumber">3</span> <span class="toctext">The users files</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="http://www.andybev.com/index.php/Using_iptables_and_PHP_to_create_a_captive_portal#Firewall_rules_required"><span class="tocnumber">4</span> <span class="toctext">Firewall rules required</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="http://www.andybev.com/index.php/Using_iptables_and_PHP_to_create_a_captive_portal#Setting_up_rmtrack"><span class="tocnumber">5</span> <span class="toctext">Setting up rmtrack</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="http://www.andybev.com/index.php/Using_iptables_and_PHP_to_create_a_captive_portal#Configuring_sudo"><span class="tocnumber">6</span> <span class="toctext">Configuring sudo</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="http://www.andybev.com/index.php/Using_iptables_and_PHP_to_create_a_captive_portal#PHP_script"><span class="tocnumber">7</span> <span class="toctext">PHP script</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="http://www.andybev.com/index.php/Using_iptables_and_PHP_to_create_a_captive_portal#In_use"><span class="tocnumber">8</span> <span class="toctext">In use</span></a></li>
+</ul>
+</td></tr></tbody></table>
+<h2> <span class="mw-headline" id="Software_required">Software required</span></h2>
+<p>Any recent Linux distribution should be able to be used for these scripts. The example shown <a href="http://www.andybev.com/index.php/Setting_up_a_captive_portal_from_scratch_using_Debian" title="Setting up a captive portal from scratch using Debian">here</a> uses Debian.
+</p><p>The following packages need to be installed:
+</p>
+<ul><li> conntrack
+</li><li> sudo
+</li><li> psmisc
+</li><li> PHP
+</li><li> squid (if you want web caching)
+</li></ul>
+<p>With Debian, all of the above can be installed with apt-get install &lt;package&gt;.
+</p><p>There are also other custom scripts, all of which are described below
+</p>
+<h2> <span class="mw-headline" id="Principle_of_operation">Principle of operation</span></h2>
+<p>This page assumes that a single server is used on a network of clients to act as a router to the internet. The server should be setup as normal to share a single internet connection (the scripts below include the required firewall rules). On the server a number of iptables firewall rules are used to block a client accessing the internet until they have registered. Registration is carried out by a user browsing to any website, after which they are redirected to a signup webpage (served using Apache and PHP on the server). Once the user has completed the signup form, the client is allowed unrestricted access to the internet.
+</p><p><br>
+Firewall rules are configured to:
+</p>
+<ul><li> MARK any traffic from an unrecognised client with the number 99
+</li><li> DROP any traffic marked 99
+</li><li> Redirect to the localhost any traffic for port 80 that is MARKed 99
+</li></ul>
+<p>The localhost contains PHP scripts that add firewall rules 'on the fly' as people sign up on the webpage. These rules stop the client's traffic being MARKed 99. In addition, all registered PCs have their MAC address written to a file that is used on reboot to re-enable those clients.
+</p>
+<h2> <span class="mw-headline" id="The_users_files">The users files</span></h2>
+<p>In this example a flat file is used to store all the details of users already registered (/var/lib/users). Depending on your Apache setup, you may need to locate the file in the Apache root directory. It is in the following format:
+</p><p>Name  &lt;tab&gt;  Email  &lt;tab&gt;  Client IP  &lt;tab&gt;  Client MAC  &lt;tab&gt;  Date
+</p>
+<h2> <span class="mw-headline" id="Firewall_rules_required">Firewall rules required</span></h2>
+<p><strong>By andy@andybev.com (Apr 2011) - I have just updated these rules again, this time to move the MARKing into the mangle table and keep the DNAT in the nat table. I have not tested them yet though; please let me know if there are any problems.</strong>
+</p><p>The following iptables rules are needed in your firewall. Add them to your system's firewall scripts, or alternatively put them in their own file, make it executable, and force it to run at system startup.
+</p>
+<code><pre>IPTABLES=/sbin/iptables
+
+# Create internet chain
+# This is used to authenticate users who have already signed up
+$IPTABLES -N internet -t mangle
+
+# First send all traffic via newly created internet chain
+# At the prerouting NAT stage this will DNAT them to the local
+# webserver for them to signup if they aren't authorised
+# Packets for unauthorised users are marked for dropping later
+$IPTABLES -t mangle -A PREROUTING -j internet
+
+###### INTERNET CHAIN ##########
+# Allow authorised clients in, redirect all others to login webserver
+# Add known users to the NAT table to stop their dest being rewritten
+# Ignore MAC address with a * - these users are blocked
+# This awk script goes through the /var/lib/users flat file line by line
+awk 'BEGIN { FS="\t"; } { system("$IPTABLES -t mangle -A internet -m mac --mac-source "$4" -j RETURN"); }' /var/lib/users
+
+# MAC address not found. Mark the packet 99
+$IPTABLES -t mangle -A internet -j MARK --set-mark 99
+################################
+
+# Redirects web requests from Unauthorised users to logon Web Page
+$IPTABLES -t nat -A PREROUTING -m mark --mark 99 -p tcp --dport 80 -j DNAT --to-destination 10.0.0.1
+
+# Now that we've got to the forward filter, drop all packets
+# marked 99 - these are unknown users. We can't drop them earlier
+# as there's no filter table
+$IPTABLES -t filter -A FORWARD -m mark --mark 99 -j DROP
+
+# Do the same for the INPUT chain to stop people accessing the web through Squid
+$IPTABLES -t filter -A INPUT -p tcp --dport 80 -j ACCEPT
+$IPTABLES -t filter -A INPUT -p udp --dport 53 -j ACCEPT
+$IPTABLES -t filter -A INPUT -m mark --mark 99 -j DROP
+
+# Enable Internet connection sharing
+echo "1" &gt; /proc/sys/net/ipv4/ip_forward
+$IPTABLES -A FORWARD -i ppp0 -o eth0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+$IPTABLES -A FORWARD -i eth0 -o ppp0 -j ACCEPT
+$IPTABLES -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
+</pre></code>
+<h2> <span class="mw-headline" id="Setting_up_rmtrack">Setting up rmtrack</span></h2>
+<p>rmtrack is a one line script to remove connection track information about a client. If this script is not present then when the redirect is done on the completion of a user signing up, they may still not be able to access the page they were looking for. For example, if they go to www.google.com, they will first be redirected to the signup page on the local webserver. When the signup page redirects them back to Google, if the tracking information has not been cleared then they may end up back at the signup page, even though they've already signed up.
+</p><p>Create the file /usr/bin/rmtrack and make it executable with the following contents:
+</p>
+<code><pre>/usr/sbin/conntrack -L \
+    |grep $1 \
+    |grep ESTAB \
+    |grep 'dport=80' \
+    |awk \
+        "{ system(\"conntrack -D --orig-src $1 --orig-dst \" \
+            substr(\$6,5) \" -p tcp --orig-port-src \" substr(\$7,7) \" \
+            --orig-port-dst 80\"); }"
+</pre></code>
+<p>Note: the single command has been split over several lines
+</p>
+<h2> <span class="mw-headline" id="Configuring_sudo">Configuring sudo</span></h2>
+<p>Sudo needs to be configured to allow the apache web server to issue certain iptables commands in order to allow clients to access the internet after they have signed up. Use visudo to add the following commands to the sudoers file:
+</p>
+<code><pre>www-data ALL = NOPASSWD: /sbin/iptables -I internet 1 -t mangle -m mac --mac-source&nbsp;??\:??\:??\:??\:??\:?? -j RETURN
+www-data ALL = NOPASSWD: /sbin/iptables -D internet -t mangle -m mac --mac-source&nbsp;??\:??\:??\:??\:??\:?? -j RETURN
+www-data ALL = NOPASSWD: /usr/bin/rmtrack [0-9]*.[0-9]*.[0-9]*.[0-9]*
+</pre></code>
+<p><strong>Note:</strong> Sudo does not use regular expressions, so the final rule is not as preferable as it should be.
+</p>
+<h2> <span class="mw-headline" id="PHP_script">PHP script</span></h2>
+<p>One PHP script is described here. This is the main index.php script that the user sees when they initially try and access the internet and are redirected. This example script just asks for a user's name and email address, saves them to a file for future reference, and alters iptables rules to allow them access to the internet. The scripts can be edited as required. The example set of scripts at the following link force the user to accept an Acceptable User Policy and also have a facility to block users. <a rel="nofollow" class="external free" href="http://files.andybev.com/web-portal/web-portal.tar.gz">http://files.andybev.com/web-portal/web-portal.tar.gz</a>
+</p>
+<table style="background-color:#ffffcc;" cellpadding="10" cellspacing="0" border="1" width="100%">
+<tbody><tr>
+<td>For an example of how to retain a user's URL, have a look at the discussion page
+</td></tr></tbody></table>
+<code><pre>&lt;?php
+
+$server_name = "hostname";
+$domain_name = "example.com";
+$site_name = "Betty's Wireless Network";
+
+// Path to the arp command on the local server
+$arp = "/usr/sbin/arp";
+
+// The following file is used to keep track of users
+$users = "/var/lib/users";
+
+// Check if we've been redirected by firewall to here.
+// If so redirect to registration address
+if ($_SERVER['SERVER_NAME']!="$server_name.$domain_name") {
+  header("location:http://$server_name.$domain_name/index.php?add="
+    .urlencode($_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']));
+  exit;
+}
+
+// Attempt to get the client's mac address
+$mac = shell_exec("$arp -a ".$_SERVER['REMOTE_ADDR']);
+preg_match('/..:..:..:..:..:../',$mac , $matches);
+@$mac = $matches[0];
+if (!isset($mac)) { exit; }
+
+if (!isset($_POST['email']) ||&nbsp;!isset($_POST['name'])) {
+  // Name or email address not entered therefore display form
+ &nbsp;?&gt;
+  &lt;h1&gt;Welcome to &lt;?php echo $site_name;?&gt;&lt;/h1&gt;
+  To access the Internet you must first enter your details:&lt;br&gt;&lt;br&gt;
+  &lt;form method='POST'&gt;
+  &lt;table border=0 cellpadding=5 cellspacing=0&gt;
+  &lt;tr&gt;&lt;td&gt;Your full name:&lt;/td&gt;&lt;td&gt;&lt;input type='text' name='name'&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Your email address:&lt;/td&gt;&lt;td&gt;&lt;input type='text' name='email'&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;input type='submit' name='submit' value='Submit'&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;/form&gt;
+  &lt;?php
+} else {
+    enable_address();
+}
+
+// This function enables the PC on the system by calling iptables, and also saving the
+// details in the users file for next time the firewall is reset
+
+function enable_address() {
+
+    global $name;
+    global $email;
+    global $mac;
+    global $users;
+
+    file_put_contents($users,$_POST['name']."\t".$_POST['email']."\t"
+        .$_SERVER['REMOTE_ADDR']."\t$mac\t".date("d.m.Y")."\n",FILE_APPEND + LOCK_EX);
+    
+    // Add PC to the firewall
+    exec("sudo iptables -I internet 1 -t mangle -m mac --mac-source $mac -j RETURN");
+    // The following line removes connection tracking for the PC
+    // This clears any previous (incorrect) route info for the redirection
+    exec("sudo rmtrack ".$_SERVER['REMOTE_ADDR']);
+
+    sleep(1);
+    header("location:http://".$_GET['add']);
+    exit;
+}
+
+// Function to print page header
+function print_header() {
+
+ &nbsp;?&gt;
+  &lt;html&gt;
+  &lt;head&gt;&lt;title&gt;Welcome to &lt;?php echo $site_name;?&gt;&lt;/title&gt;
+  &lt;META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"&gt;
+  &lt;LINK rel="stylesheet" type="text/css" href="./style.css"&gt;
+  &lt;/head&gt;
+
+  &lt;body bgcolor=#FFFFFF text=000000&gt;
+  &lt;?php
+}
+
+// Function to print page footer
+function print_footer() {
+  echo "&lt;/body&gt;";
+  echo "&lt;/html&gt;";
+
+}
+
+?&gt;
+</pre></code>
+<h2> <span class="mw-headline" id="In_use">In use</span></h2>
+<p>Once the firewall has been enabled on the server and the rest of the scripts setup, any client trying to browse to the internet will be presented with a web page to signup. Once they have entered their details, an additional iptables rule will be created which will allow them full access to the internet.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor visited node count: 67/1000000
+Preprocessor generated node count: 116/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:2-0!*!0!!en!*!* and timestamp 20130922141037 -->
+</div><div class="printfooter">
+Retrieved from "<a href="http://www.andybev.com/index.php?title=Using_iptables_and_PHP_to_create_a_captive_portal&oldid=1300">http://www.andybev.com/index.php?title=Using_iptables_and_PHP_to_create_a_captive_portal&amp;oldid=1300</a>"</div>
+		<div id="catlinks" class="catlinks catlinks-allhidden"></div>		<!-- end content -->
+				<div class="visualClear"></div>
+	</div>
+</div></div>
+<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+				<li id="ca-nstab-main" class="selected"><a href="./Using iptables and PHP to create a captive portal - Andywiki_files/Using iptables and PHP to create a captive portal - Andywiki.htm" primary="1" context="subject" title="View the content page [alt-shift-c]" accesskey="c">Page</a></li>
+				<li id="ca-talk"><a href="http://www.andybev.com/index.php/Talk:Using_iptables_and_PHP_to_create_a_captive_portal" primary="1" context="talk" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></li>
+				<li id="ca-viewsource"><a href="http://www.andybev.com/index.php?title=Using_iptables_and_PHP_to_create_a_captive_portal&action=edit" primary="1" title="This page is protected.
+You can view its source [alt-shift-e]" accesskey="e">View source</a></li>
+				<li id="ca-history"><a href="http://www.andybev.com/index.php?title=Using_iptables_and_PHP_to_create_a_captive_portal&action=history" rel="archives" title="Past revisions of this page [alt-shift-h]" accesskey="h">History</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-createaccount"><a href="http://www.andybev.com/index.php?title=Special:UserLogin&returnto=Using+iptables+and+PHP+to+create+a+captive+portal&type=signup">Create account</a></li>
+				<li id="pt-login"><a href="http://www.andybev.com/index.php?title=Special:UserLogin&returnto=Using+iptables+and+PHP+to+create+a+captive+portal" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o">Log in</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+<a href="http://www.andybev.com/index.php/Main_Page" style="background-image: url(/skins/common/images/wiki.png);" title="Visit the main page"></a>
+	</div>
+	<div class="generated-sidebar portlet" id="p-navigation">
+		<h5>Navigation</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-mainpage-description"><a href="http://www.andybev.com/index.php/Main_Page" title="Visit the main page [alt-shift-z]" accesskey="z">Main page</a></li>
+				<li id="n-portal"><a href="http://www.andybev.com/index.php/Andywiki:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-currentevents"><a href="http://www.andybev.com/index.php/Andywiki:Current_events" title="Find background information on current events">Current events</a></li>
+				<li id="n-recentchanges"><a href="http://www.andybev.com/index.php/Special:RecentChanges" title="A list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="http://www.andybev.com/index.php/Special:Random" title="Load a random page [alt-shift-x]" accesskey="x">Random page</a></li>
+				<li id="n-help"><a href="http://www.andybev.com/index.php/Help:Contents" title="The place to find out">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="http://www.andybev.com/index.php" id="searchform">
+				<input type="hidden" name="title" value="Special:Search">
+				<input type="search" name="search" title="Search Andywiki [alt-shift-f]" accesskey="f" id="searchInput" autocomplete="off" placeholder="Search">
+				<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton">&nbsp;
+				<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton">
+			</form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="http://www.andybev.com/index.php/Special:WhatLinksHere/Using_iptables_and_PHP_to_create_a_captive_portal" title="A list of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="http://www.andybev.com/index.php/Special:RecentChangesLinked/Using_iptables_and_PHP_to_create_a_captive_portal" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+				<li id="t-specialpages"><a href="http://www.andybev.com/index.php/Special:SpecialPages" title="A list of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="http://www.andybev.com/index.php?title=Using_iptables_and_PHP_to_create_a_captive_portal&printable=yes" rel="alternate" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li>
+				<li id="t-permalink"><a href="http://www.andybev.com/index.php?title=Using_iptables_and_PHP_to_create_a_captive_portal&oldid=1300" title="Permanent link to this revision of the page">Permanent link</a></li>
+			</ul>
+		</div>
+	</div>
+</div><!-- end of the left (by default at least) column -->
+<div class="visualClear"></div>
+<div id="footer">
+	<div id="f-copyrightico">
+		<a href="http://www.gnu.org/copyleft/fdl.html"><img src="./Using iptables and PHP to create a captive portal - Andywiki_files/gnu-fdl.png" alt="GNU Free Documentation License 1.3" width="88" height="31"></a>
+	</div>
+	<div id="f-poweredbyico">
+		<a href="http://www.mediawiki.org/"><img src="./Using iptables and PHP to create a captive portal - Andywiki_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31"></a>
+	</div>
+	<ul id="f-list">
+		<li id="lastmod"> This page was last modified on 3 June 2012, at 20:31.</li>
+		<li id="viewcount">This page has been accessed 83,517 times.</li>
+		<li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3</a>.</li>
+		<li id="privacy"><a href="http://www.andybev.com/index.php/Andywiki:Privacy_policy" title="Andywiki:Privacy policy">Privacy policy</a></li>
+		<li id="about"><a href="http://www.andybev.com/index.php/Andywiki:About" title="Andywiki:About">About Andywiki</a></li>
+		<li id="disclaimer"><a href="http://www.andybev.com/index.php/Andywiki:General_disclaimer" title="Andywiki:General disclaimer">Disclaimers</a></li>
+	</ul>
+</div>
+</div>
+<script>if(window.mw){
+mw.loader.state({"site":"loading","user":"missing","user.groups":"ready"});
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.user","mediawiki.page.ready","mediawiki.searchSuggest"], null, true);
+}</script><script src="./Using iptables and PHP to create a captive portal - Andywiki_files/load(3).php" type="text/javascript"></script>
+<script>if(window.mw){
+mw.loader.state({"site":"ready"});
+}</script>
+<!-- Served in 0.188 secs. --><div class="suggestions" style="display: none; font-size: 12px;"><div class="suggestions-results"></div><div class="suggestions-special"></div></div></body></html>

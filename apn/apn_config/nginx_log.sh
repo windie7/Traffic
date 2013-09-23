@@ -18,6 +18,6 @@ if test -e ${seqfile}; then
         fi
 fi
 
-mv ${logs_path}access.log ${save_path}web_$(date -d "now" +"%Y%m%d_%H%M%S")_`printf %05d ${seq}`.log
+mv ${logs_path}access.log ${save_path}web_$(date -d "now" +"%d%m%Y_%H%M%S")_`printf %05d ${seq}`.log
 echo "${seqDate},${seq}">${seqfile}
 kill -USR1 `cat ${pid_path}`
