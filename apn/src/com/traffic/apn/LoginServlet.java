@@ -162,6 +162,11 @@ public class LoginServlet extends HttpServlet {
 					String ip = CommonUtil.getRequestIp(request);
 					if (CommonUtil.openAccess(ip, mobile)) {
 						dao.saveLogin(user.getId(), LoginBean.agent_page);
+
+						String mac = CommonUtil.getMac(ip);
+						if (!CommonUtil.isEmpty(mac)) {
+							CommonUtil.saveLogin(mac, ip, mobile);
+						}
 						response.sendRedirect("/apn/ad.html");
 						return;
 					} else {

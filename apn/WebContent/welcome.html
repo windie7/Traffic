@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
-<HTML>
-<HEAD>
-<TITLE>安全须知</TITLE>
+<html>
+<head>
+<title>安全须知</title>
 <META content=text/html;charset=UTF-8 http-equiv=Content-Type />
 <META content=max-age=3600 http-equiv=Cache-Control />
 <META name=MobileOptimized content=240 />
@@ -10,16 +10,21 @@
 <META name=viewport content="width=device-width, initial-scale=1.0,  minimum-scale=1.0, maximum-scale=1.0">
 <META name=keywords content="" />
 <META name=description content="" />
-<META name=GENERATOR content="MSHTML 8.00.6001.23501">
+<META name=GENERATOR content="MSHTML 8.00.6001.23501"/>
 <link type="text/css" rel="stylesheet" href="css/login.css" />
 <script type="text/javascript" src="js/check.js"></script>
- 
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script> 
+<script type="text/javascript">
+	$(document).ready(function() {		
+		$("#sec_video")[0].click();
+	});
+</script>
 </head>
 <body>
 <div class="contain">
   <div class="safe_logo w30"> <a href=""><img src="images/safe_logo.png"  alt="" /></a> </div>
   <div class="flash">
-     <a href="images/video1.mp4"><img class="flashimg" src="images/flash.png" alt="" /><img class="ico" src="images/video_hover.png" alt="" /></a>
+     <a id="sec_video" href="images/video1.mp4"><img class="flashimg" src="images/flash.png" alt="" /><img class="ico" src="images/video_hover.png" alt="" /></a>     
   </div>
   <div class="past"> <a href="login.jsp">跳过</a> </div>
   <div class="bottom_bg"> </div>

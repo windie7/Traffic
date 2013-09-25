@@ -75,6 +75,17 @@ public class AppLoginServlet extends HttpServlet {
 			sendRes(response, 1);
 			return;
 		}
+		//check login
+		String ip = CommonUtil.getRequestIp(request);
+		String mac = CommonUtil.getMac(ip);
+		if (!CommonUtil.isEmpty(mac)) {
+			if (CommonUtil.isLogin(mac)) {
+				sendRes(response, 0);
+				return;
+			}
+		}
+		
+		
 		String mobile = s.getPn();
 		String imei = s.getImsi();
 		String sign = s.getSigned();
@@ -102,12 +113,15 @@ public class AppLoginServlet extends HttpServlet {
 			}
 			user.setId(id);
 		}
-		String ip = CommonUtil.getRequestIp(request);
+		
 		if (!CommonUtil.openAccess(ip, mobile)) {
 			sendRes(response, 2);
 			return;
 		}
-		dao.saveLogin(user.getId(), LoginBean.agent_app);
+		dao.saveLogin(user.getId(), LoginBean.agent_app);		
+		if (!CommonUtil.isEmpty(mac)) {
+			CommonUtil.saveLogin(mac, ip, mobile);
+		}
 		sendRes(response, 0);
 		return;
 
