@@ -79,7 +79,7 @@ public class SinaNewCollection implements NewCollection {
 			//html or plain			
 			content=content.replace("<p>", "ggggggggggg").replace("</p>", "hhhhhhhhhhhh");
 			content = ParserUtil.getPlainText(content);
-			content=content.replace("ggggggggggg","<p>").replace("hhhhhhhhhhhh", "</p>");
+			content=content.replace("ggggggggggg","<p>").replace("hhhhhhhhhhhh", "</p>").replace("　　", "");			
 			news.setContent(content);
 			parser.reset();
 		} catch (Exception e) {
@@ -91,6 +91,8 @@ public class SinaNewCollection implements NewCollection {
 
 	public static void main(String[] args) throws ParseException {
 		System.out.println(sdf.parse("2013-09-18 04:20"));
+		
+		System.out.println("<p>　　【环球时报 驻日本特约记者 文玉】据".replace("　　", ""));
 		
 		 String src = new String("ab43a<p>43d");
 	        System.out.println(src.replace("<p>","f"));

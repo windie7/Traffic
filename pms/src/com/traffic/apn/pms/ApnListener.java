@@ -111,6 +111,8 @@ public class ApnListener implements ServletContextListener {
 				}
 
 				poplateIndex(map);
+				
+				poplateIndexHeadline(map.get(NewsType.slot));
 			}
 
 		}, first, 24 * 60 * 60 * 1000);
@@ -218,6 +220,37 @@ public class ApnListener implements ServletContextListener {
 			fos.close();
 		} catch (IOException e) {
 			log.error("populate news index error", e);
+		}
+	}
+	
+	private void poplateIndexHeadline(List<News> list) {
+
+		try {
+			VelocityContext context = new VelocityContext();
+			String today = sdf.format(new Date());
+			context.put("list", list);
+			context.put("dir", "news/"+today);
+			Template template = Velocity.getTemplate("template/today_news.vm");
+
+			StringWriter sw = new StringWriter();
+			template.merge(context, sw);
+			sw.flush();
+
+			File dir = new File(staticReposDir + "/");
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+
+			File f = new File(dir, "today_news.html");
+			if (f.exists())
+				f.delete();
+			f.createNewFile();
+
+			FileWriter fos = new FileWriter(f);
+			fos.write(sw.getBuffer().toString());
+			fos.close();
+		} catch (IOException e) {
+			log.error("populate news index headline error", e);
 		}
 	}
 }

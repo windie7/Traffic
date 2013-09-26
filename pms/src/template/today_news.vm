@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<head>
+<link type="text/css" rel="stylesheet" href="css/today_news.css" />
+</head>
+<body>
+<ul class="news">
+	#set( $i = 0 )
+  	  #foreach( $news in $list )  
+  	  	#set( $i =$i+1  )	
+  	  	#if($i==4)
+          #break
+  		#end
+  	  	#set( $link = $dir+"/"+$news.id+".html" )  		
+      <li><a href="$link" target="_top">$news.title</a></li>
+  	  #end
+</ul>
+</body>
+
