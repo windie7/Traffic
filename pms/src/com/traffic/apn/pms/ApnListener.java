@@ -8,11 +8,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.TreeMap;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -97,7 +97,7 @@ public class ApnListener implements ServletContextListener {
 					return;
 				poplateList(list);
 
-				Map<NewsType, List<News>> map = new HashMap<NewsType, List<News>>();
+				Map<NewsType, List<News>> map = new TreeMap<NewsType, List<News>>();
 				for (News news : list) {
 					NewsType type = NewsType.valueOfId(news.getNewstype());
 					if (map.get(type) == null) {

@@ -59,8 +59,8 @@ public class CommonUtil {
 			return ret == 0;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
-			// return true;
+			//return false;
+			 return true;
 		}
 	}
 

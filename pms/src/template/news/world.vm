@@ -18,7 +18,7 @@
 <body >
 <iframe src="news_head.html" frameborder="0" scrolling="no" style="width:100%; height:35px; overflow:hidden"></iframe>
 <div id="contain">
-  <div class="logo"><a href=""><img class="left" src="../images/guoji.png" alt="" /></a><a href="#"><img class="right" src="../images/down2.png" alt="" /></a>
+  <div class="logo"><a href="index.html"><img class="left" src="../images/guoji.png" alt="" /></a><a href="../mmdata/client/eluba.apk"><img class="right" src="../images/down2.png" alt="" /></a>
     <div class="clear"></div>
   </div>
   <div class="catelist">
@@ -27,7 +27,7 @@
       <li><a href="china.html">国内</a></li>
       <li class="now"><a href="world.html">国际</a></li>
       <li><a href="society.html">社会</a></li>
-      <li><a href="ent.html">专题</a></li>
+      <li><a href="ent.html">娱乐</a></li>
       <div class="clear"></div>
     </ul>
   </div>

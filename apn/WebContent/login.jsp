@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf8"
 	pageEncoding="utf8"%>
+<%@ page import="com.traffic.apn.*"%>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html>
 <head>
@@ -43,7 +44,7 @@
 			var c = ret.responseText;
 			if (c == '0') {
 				$("#i_code").attr("disabled", true);
-				refreshCode(600);
+				refreshCode(<%=ApnConfig.getInstance().getProperties().getProperty("sms.timeout", "600")%>);
 				return;
 			} else if (c == '1') {
 				$("#tip_code").text("请输入有效手机号码");
@@ -115,16 +116,10 @@
 				</div>
 				<div class="clear"></div>
 				<div class="getcode">
-					<div class="left">
-						<div class="border">
-							<img src="images/title_left.png" alt="" />
-						</div>
+					<div class="left">						
 						<div class="words">
-							<a id="i_code" href="javascript:void(0)">获取短信验证码</a>
-						</div>
-						<div class="border">
-							<img src="images/title_right.png" alt="" />
-						</div>
+							<a id="i_code" href="javascript:void(0)">获取验证码</a>
+						</div>					
 					</div>
 					<div id="tip_code" class="right"></div>
 				</div>
@@ -138,23 +133,21 @@
 				<div class="clear"></div>
 				<div id="tips" class="notice">${msg}</div>
 				<div class="getcode">
-					<div class="border">
-						<img src="images/title_left.png" alt="" />
-					</div>
+					
 					<div class="words wid">
 						<a id="i_login" href="javascript:void(0)">访问</a>
 					</div>
-					<div class="border">
-						<img src="images/title_right.png" alt="" />
-					</div>
+			
 				</div>
 				<div class="clear"></div>
 
 			</div>
 		</form>
-		<div class="ad">
-			<img src="images/down_ad.png" alt=" " />
-		</div>
+	<div class="ad">
+	  <a href="/mmdata/client/eluba.apk">
+	    <img src="image/down_ad.png" alt=""/>
+	  </a>
+	</div>
 	</div>
 </body>
 </html>

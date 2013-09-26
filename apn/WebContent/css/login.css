@@ -82,7 +82,7 @@ img {
 	height:28px;
 	line-height:28px;
 	border:solid 1px #828282;
-	width:175px;
+	width:183px;
 }
 .getcode input.button {
 	background:#1665A0;
@@ -97,15 +97,16 @@ img {
 }
 .getcode .words {
 	background:url(../images/title_center.png);
-	width:110px;
+	width:95px;
 	float:left;
 	height:38px;
 	line-height:38px;
 	text-align:center
 }
 .margin {
-	width:320px;
+	width: 290px;
 	margin: 0 auto;
+	padding: 0 15px;
 }
 .getcode .right {
 	line-height:38px;
@@ -117,7 +118,7 @@ img {
 	width:280px;
 }
 .getcode .words.wid {
-	width:258px;
+	width:290px;
 }
 .ad.p10 {
 	padding-top:15px;

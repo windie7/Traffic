@@ -1,6 +1,5 @@
 package com.traffic.apn;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  * Servlet implementation class LoginServlet
@@ -26,7 +24,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static Logger log = Logger.getLogger(LoginServlet.class);
-	private static final long codeExpire = 600 * 1000;
+	private static long codeExpire ;
 
 	private ApnDao dao = new ApnDao();
 
@@ -36,8 +34,10 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginServlet() {
+	public LoginServlet() {		
 		super();
+		String s=ApnConfig.getInstance().getProperties().getProperty("sms.timeout", "600");
+		codeExpire=Integer.valueOf(s).longValue()*1000;
 	}
 
 	/**

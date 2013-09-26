@@ -13,8 +13,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.traffic.apn.SignIn;
 
 public class TestApi {
-	private static final String url = "http://localhost:8080/apn/api/signin";
-	private static final String in = "{\"pn\":\"12233445566\",\"imsi\":\"1231231\",\"signed\":\"33\"}";
+	private static final String url = "http://192.168.145.132:8080/apn/api/signin";
+	private static final String in = "{\"pn\":\"13581586503\",\"imsi\":\"1231231\",\"signed\":\"33\"}";
 
 	public static void testPost() throws IOException {
 		
